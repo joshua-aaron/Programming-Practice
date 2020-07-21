@@ -17,6 +17,7 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     int arr[10];
     vector<int> v2;
+    srand(time(0));
     for (int ii = 0; ii < 10; ii++) {
         arr[ii] = rand() % 10;
         v2.push_back(rand() % 10);
@@ -26,10 +27,12 @@ int main(int argc, const char * argv[]) {
     for (int ii = 0; ii < 100; ii++ ) {
         v.push_back(rand() % 1000);
     }
+    
     for (auto p : v)
         cout << p << " ";
     cout << endl;
-    insertion_sort_jn_cmp(v.begin(), v.end(), std::less<int>{});
+    
+    insertion_sort_jn_cmp(v.begin(), v.end());
     
     for (auto p : v)
         cout << p <<" ";
@@ -37,7 +40,9 @@ int main(int argc, const char * argv[]) {
     for (auto p : arr)
         cout << p << " ";
     cout << endl;
-    merge_int(arr, 0, sizeof(arr)/sizeof(int) - 1);
+    
+    merge_gen(arr, arr+10);
+    
     cout << "Sorted:" << endl;
     for (auto p : arr)
         cout << p << " ";
@@ -45,7 +50,9 @@ int main(int argc, const char * argv[]) {
     for (auto p : v2)
         cout << p << " ";
     cout << endl;
-    merge_gen(v2.begin(), std::prev(v2.end()));
+    
+    merge_gen(v2.begin(), v2.end(), std::greater<int>{});
+    
     cout << "Sorted:" << endl;
     for (auto p : v2)
         cout << p << " ";
