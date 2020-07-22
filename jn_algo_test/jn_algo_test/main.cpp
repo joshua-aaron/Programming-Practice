@@ -32,7 +32,7 @@ int main(int argc, const char * argv[]) {
         cout << p << " ";
     cout << endl;
     
-    insertion_sort_jn_cmp(v.begin(), v.end());
+    clrs_impl_jn::insertion_sort_jn_cmp(v.begin(), v.end());
     
     for (auto p : v)
         cout << p <<" ";
@@ -41,7 +41,7 @@ int main(int argc, const char * argv[]) {
         cout << p << " ";
     cout << endl;
     
-    merge_gen(arr, arr+10);
+    clrs_impl_jn::merge_gen(arr, arr+10);
     
     cout << "Sorted:" << endl;
     for (auto p : arr)
@@ -51,7 +51,7 @@ int main(int argc, const char * argv[]) {
         cout << p << " ";
     cout << endl;
     
-    merge_gen(v2.begin(), v2.end(), std::greater<int>{});
+    clrs_impl_jn::merge_gen(v2.begin(), v2.end(), std::greater<int>{});
     
     cout << "Sorted:" << endl;
     for (auto p : v2)
