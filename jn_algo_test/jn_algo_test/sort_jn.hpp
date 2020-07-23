@@ -6,6 +6,7 @@
 #ifndef SORT_JN_HPP_
 #define SORT_JN_HPP_
 #include <iostream>
+#include "binary_heap.hpp"
 
 namespace clrs_impl_jn {
     // This insertion sort implementation takes 2 iterators and a comparator object.
@@ -85,6 +86,17 @@ namespace clrs_impl_jn {
         merge_gen(first, std::next(mid), cmp);
         merge_gen(std::next(mid), last, cmp);
         merge_gen_helper(first, mid, std::next(first,size - 1), cmp);
+    }
+
+    // Implementation of generic Heapsort
+    template <typename T, typename FwdIt>
+    void heapsort(FwdIt first, FwdIt last) {
+        T tmp;
+        Max_bin_heap<T, FwdIt> max_heap(first, last);
+        
+        for (int ii = max_heap.get_size() - 1; ii > 0; ii--) {
+            
+        }
     }
 }
 #endif /* SORT_JN_HPP_ */

@@ -10,17 +10,13 @@
 #define node_hpp
 namespace clrs_impl_jn {
 
-template <typename T>
-struct Tree_node {
-    Tree_node();
-    Tree_node(T);
-    ~Tree_node();
-    Tree_node(const Tree_node&);
-    Tree_node& operator=(const Tree_node&);
-    Tree_node* left;
-    Tree_node* right;
-    T key;
-}
-
+	template <typename T>
+	struct Tree_node {
+	    Tree_node(T key, Tree_node<T>* left = nullptr, Tree_node<T>* right = nullptr)
+	    	: key{key}, left{left}, right{right} {}
+	    Tree_node* left;
+	    Tree_node* right;
+	    T key;
+	}
 }
 #endif /* node_h */
