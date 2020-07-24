@@ -89,10 +89,10 @@ namespace clrs_impl_jn {
     }
 
     // Implementation of generic Heapsort
-    template <typename T, typename FwdIt>
-    void heapsort(FwdIt first, FwdIt last) {
-        Max_bin_heap<T, FwdIt> heap(first, last);
-        heap.to_sorted_array(first);
+    template <typename T>
+    void heapsort(T* data, std::size_t size) {
+        Max_bin_heap<T> heap(data, size);
+        heap.to_sorted_array(data);
     }
 }
 #endif /* SORT_JN_HPP_ */
