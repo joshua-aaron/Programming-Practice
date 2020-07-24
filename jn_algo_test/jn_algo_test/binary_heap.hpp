@@ -40,7 +40,7 @@ namespace clrs_impl_jn {
     };
 
     template <typename T, typename A = std::allocator<T>>
-    class Min_bin_heap {
+    class Min_bin_heap : public Heap_base<T,A> {
     public:
         Min_bin_heap();
         explicit Min_bin_heap(T);
