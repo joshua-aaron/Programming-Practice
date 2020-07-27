@@ -19,6 +19,7 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     int arr[10];
     int arr2[10];
+    int arr3[10] = {1,5,2,9,9,4,7,0,6,3};
     vector<int> v2;
     vector<double> v3;
     srand(time(0));
@@ -31,6 +32,8 @@ int main(int argc, const char * argv[]) {
         v2.push_back(rand() % 10);
         v3.push_back(dist(engine));
     }
+    vector<double> v4(v3);
+    vector<int> v5(v2);
     vector <int> v;
     //srand(time(0));
     for (int ii = 0; ii < 100; ii++ ) {
@@ -103,5 +106,42 @@ int main(int argc, const char * argv[]) {
     clrs_impl_jn::Max_bin_heap<double> heap3(1.0);
     heap3 = myheap;
     heap3.print_data();
+    
+    cout << "Quicksort:" << endl;
+    for (auto p : arr3)
+        cout << p << " ";
+    cout << endl;
+    
+    clrs_impl_jn::randomized_quicksort(arr3, arr3 + 10);
+    
+    cout << "Sorted:" << endl;
+    for (auto p : arr3)
+        cout << p << " ";
+    cout << endl;
+    
+    cout << "Quicksort:" << endl;
+    for (auto p : v4)
+        cout << p << " ";
+    cout << endl;
+    
+    clrs_impl_jn::randomized_quicksort(v4.begin(), v4.end());
+    
+    cout << "Sorted:" << endl;
+    for (auto p : v4)
+        cout << p << " ";
+    cout << endl;
+    
+    cout << "Quicksort:" << endl;
+    for (auto p : v5)
+        cout << p << " ";
+    cout << endl;
+    
+    clrs_impl_jn::randomized_quicksort(v5.begin(), v5.end());
+    
+    cout << "Sorted:" << endl;
+    for (auto p : v5)
+        cout << p << " ";
+    cout << endl;
+    
     return 0;
 }
