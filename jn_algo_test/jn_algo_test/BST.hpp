@@ -25,27 +25,27 @@ namespace clrs_impl_jn {
         BST& operator=(BST&&);
         std::size_t size() const;
         T max() const;
-        Tree_node<T>* max(Tree_node<T>*) const;
+        Tree_Node<T>* max(Tree_Node<T>*) const;
         T min() const;
-        Tree_node<T>* min(Tree_node<T>*) const;
-        Tree_node<T>* successor(Tree_node<T>*) const;
-        Tree_node<T>* predecessor(Tree_node<T>*) const;
+        Tree_Node<T>* min(Tree_Node<T>*) const;
+        Tree_Node<T>* successor(Tree_Node<T>*) const;
+        Tree_Node<T>* predecessor(Tree_Node<T>*) const;
         bool contains(T) const;
-        Tree_node<T>* find(T) const;
+        Tree_Node<T>* find(T) const;
         void remove(T);
         void insert(T);
         void inorder_walk() const;
         void postorder_walk() const;
         void preorder_walk() const;
     private:
-        void inorder_walk(Tree_node<T>*) const;
-        void postorder_walk(Tree_node<T>*) const;
-        void preorder_walk(Tree_node<T>*) const;
-        void delete_node(Tree_node<T>*);
-        void transplant(Tree_node<T>*,Tree_node<T>*);
-        void deallocate_nodes(Tree_node<T>*);
-        void fill_tree(Tree_node<T>*,Tree_node<T>*);
-        Tree_node<T>* root_;
+        void inorder_walk(Tree_Node<T>*) const;
+        void postorder_walk(Tree_Node<T>*) const;
+        void preorder_walk(Tree_Node<T>*) const;
+        void delete_node(Tree_Node<T>*);
+        void transplant(Tree_Node<T>*,Tree_Node<T>*);
+        void deallocate_nodes(Tree_Node<T>*);
+        void fill_tree(Tree_Node<T>*,Tree_Node<T>*);
+        Tree_Node<T>* root_;
         std::size_t size_;
     };
     
@@ -53,7 +53,7 @@ namespace clrs_impl_jn {
     BST<T>::BST() : root_{nullptr}, size_{0} {}
     
     template <typename T>
-    BST<T>::BST(T key) : root_{new Tree_node<T>(key)}, size_{1} {
+    BST<T>::BST(T key) : root_{new Tree_Node<T>(key)}, size_{1} {
         root_->parent_ = nullptr;
     }
     
@@ -62,7 +62,7 @@ namespace clrs_impl_jn {
         if (size <= 0)
             throw new std::runtime_error("Invalid size");
         size_ = size;
-        root_ = new Tree_node<T>(*data);
+        root_ = new Tree_Node<T>(*data);
         root_->parent_ = nullptr;
         
         for (int ii = 1; ii < size; ii++)
@@ -76,7 +76,7 @@ namespace clrs_impl_jn {
     }
     
     template <typename T>
-    void BST<T>::deallocate_nodes(Tree_node<T>* node) {
+    void BST<T>::deallocate_nodes(Tree_Node<T>* node) {
         if (node == nullptr)
             return;
         deallocate_nodes(node->left_);
@@ -92,7 +92,7 @@ namespace clrs_impl_jn {
         if (size_ == 0)
             root_ = nullptr;
         else {
-            root_ = new Tree_node<T>(old_bst.root_->key);
+            root_ = new Tree_Node<T>(old_bst.root_->key);
             root_->parent_ = nullptr;
             fill_tree(root_->left_, old_bst.root_->left_);
             fill_tree(root_->right_, old_bst.root_->right_);
@@ -109,7 +109,7 @@ namespace clrs_impl_jn {
         if (size_ == 0)
             root_ = nullptr;
         else {
-            root_ = new Tree_node<T>(old_bst.root_->key);
+            root_ = new Tree_Node<T>(old_bst.root_->key);
             fill_tree(root_->left_, old_bst.root_->left_);
             fill_tree(root_->right_, old_bst.root_->right_);
         }
@@ -118,11 +118,11 @@ namespace clrs_impl_jn {
     
     // Helper function to copy nodes
     template <typename T>
-    void BST<T>::fill_tree(Tree_node<T>* member_node, Tree_node<T>* tocopy_node) {
+    void BST<T>::fill_tree(Tree_Node<T>* member_node, Tree_Node<T>* tocopy_node) {
         if (tocopy_node == nullptr)
             member_node = nullptr;
         else {
-            member_node = new Tree_node<T>(tocopy_node->key);
+            member_node = new Tree_Node<T>(tocopy_node->key);
             if (tocopy_node->left_ == nullptr)
                 member_node->left_ = nullptr;
             else
@@ -154,7 +154,7 @@ namespace clrs_impl_jn {
     T BST<T>::max() const {
         if (root_ == nullptr)
             return std::numeric_limits<T>::quiet_NaN();
-        Tree_node<T>* node = root_;
+        Tree_Node<T>* node = root_;
         while (node->right_ != nullptr)
             node = node->right_;
         return node->key_;
@@ -164,14 +164,14 @@ namespace clrs_impl_jn {
     T BST<T>::min() const {
         if (root_ == nullptr)
             return std::numeric_limits<T>::quiet_NaN();
-        Tree_node<T>* node = root_;
+        Tree_Node<T>* node = root_;
         while (node->left_ != nullptr)
             node = node->left_;
         return node->key_;
     }
     
     template <typename T>
-    Tree_node<T>* BST<T>::max(Tree_node<T>* node) const {
+    Tree_Node<T>* BST<T>::max(Tree_Node<T>* node) const {
         if (node == nullptr)
             return nullptr;
         while (node->right_ != nullptr)
@@ -180,7 +180,7 @@ namespace clrs_impl_jn {
     }
     
     template <typename T>
-    Tree_node<T>* BST<T>::min(Tree_node<T>* node) const {
+    Tree_Node<T>* BST<T>::min(Tree_Node<T>* node) const {
         if (node == nullptr)
             return nullptr;
         while (node->left_ != nullptr)
@@ -189,10 +189,10 @@ namespace clrs_impl_jn {
     }
     
     template <typename T>
-    Tree_node<T>* BST<T>::successor(Tree_node<T>* node) const {
+    Tree_Node<T>* BST<T>::successor(Tree_Node<T>* node) const {
         if (node->right_ != nullptr)
             return min(node->right_);
-        Tree_node<T>* parent = node->parent_;
+        Tree_Node<T>* parent = node->parent_;
         while (parent != nullptr && node == parent->right) {
             node = parent;
             parent = parent->parent_;
@@ -201,7 +201,7 @@ namespace clrs_impl_jn {
     }
     
     template <typename T>
-    Tree_node<T>* BST<T>::predecessor(Tree_node<T>* node) const {
+    Tree_Node<T>* BST<T>::predecessor(Tree_Node<T>* node) const {
         if (node == nullptr || node->left_ == nullptr)
             return nullptr;
         else
@@ -230,7 +230,7 @@ namespace clrs_impl_jn {
     }
     
     template <typename T>
-    void BST<T>::inorder_walk(Tree_node<T>* node) const {
+    void BST<T>::inorder_walk(Tree_Node<T>* node) const {
         if (node != nullptr) {
             inorder_walk(node->left_);
             std::cout << node->key_ << " ";
@@ -239,7 +239,7 @@ namespace clrs_impl_jn {
     }
     
     template <typename T>
-    void BST<T>::postorder_walk(Tree_node<T>* node) const {
+    void BST<T>::postorder_walk(Tree_Node<T>* node) const {
         if (node != nullptr) {
             postorder_walk(node->left_);
             postorder_walk(node->right_);
@@ -248,7 +248,7 @@ namespace clrs_impl_jn {
     }
     
     template <typename T>
-    void BST<T>::preorder_walk(Tree_node<T>* node) const {
+    void BST<T>::preorder_walk(Tree_Node<T>* node) const {
         if (node != nullptr) {
             std::cout << node->key_ << " ";
             preorder_walk(node->left_);
@@ -258,15 +258,15 @@ namespace clrs_impl_jn {
     
     template <typename T>
     bool BST<T>::contains(T key) const {
-        Tree_node<T>* curr = root_;
+        Tree_Node<T>* curr = root_;
         while (curr != nullptr && key != curr->key_)
             (key < curr->key_) ? curr = curr->left_ : curr = curr->right_;
         return (curr == nullptr) ? false : true;
     }
     
     template <typename T>
-    Tree_node<T>* BST<T>::find(T key) const {
-        Tree_node<T>* curr = root_;
+    Tree_Node<T>* BST<T>::find(T key) const {
+        Tree_Node<T>* curr = root_;
         while (curr != nullptr && key != curr->key_)
             (key < curr->key_) ? curr = curr->left_ : curr = curr->right_;
         return curr;
@@ -274,9 +274,9 @@ namespace clrs_impl_jn {
     
     template <typename T>
     void BST<T>::insert(T key) {
-        Tree_node<T>* key_node{new Tree_node<T>(key)};
-        Tree_node<T>* tmp{nullptr};
-        Tree_node<T>* curr{root_};
+        Tree_Node<T>* key_node{new Tree_Node<T>(key)};
+        Tree_Node<T>* tmp{nullptr};
+        Tree_Node<T>* curr{root_};
         while (curr != nullptr) {
             tmp = curr;
             if (key < curr->key_)
@@ -295,12 +295,12 @@ namespace clrs_impl_jn {
     
     template <typename T>
     void BST<T>::remove(T key) {
-        Tree_node<T>* node = find(key);
+        Tree_Node<T>* node = find(key);
         delete_node(node);
     }
     
     template <typename T>
-    void BST<T>::transplant(Tree_node<T>* p, Tree_node<T>* u) {
+    void BST<T>::transplant(Tree_Node<T>* p, Tree_Node<T>* u) {
         if (p->parent_ == nullptr)
             root_ = u;
         else if (p == p->parent_->left_)
@@ -312,13 +312,13 @@ namespace clrs_impl_jn {
     }
     
     template <typename T>
-    void BST<T>::delete_node(Tree_node<T>* node) {
+    void BST<T>::delete_node(Tree_Node<T>* node) {
         if (node->left_ == nullptr)
             transplant(node, node->right_);
         else if (node->right_ == nullptr)
             transplant(node, node->left_);
         else {
-            Tree_node<T>* min = min(node->right_);
+            Tree_Node<T>* min = min(node->right_);
             if (min->parent_ != node) {
                 transplant(min, min->right_);
                 min->right_ = node->right_;

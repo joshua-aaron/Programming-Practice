@@ -6,6 +6,7 @@
 //  Copyright © 2020 Joshua Navon. All rights reserved.
 //
 #include "gtest/gtest.h"
+#include "red_black_tree.hpp"
 #include "BST.hpp"
 #include "sort_jn.hpp"
 #include "binary_heap.hpp"
