@@ -23,6 +23,7 @@ int main(int argc, const char * argv[]) {
     int arr[10];
     int arr2[10];
     int arr3[10] = {1,5,2,9,9,4,7,0,6,3};
+    int arr4[10] = {1,5,7,2,6,9,0,9,8,3};
     vector<int> v2;
     vector<double> v3;
     srand(time(0));
@@ -154,5 +155,11 @@ int main(int argc, const char * argv[]) {
     }
     cout << endl;
     bst.inorder_walk();
+    
+    
+    clrs_impl_jn::RB_Tree<int> rb(arr4, 10);
+    
+    
+    
     return 0;
 }

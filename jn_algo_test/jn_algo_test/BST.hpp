@@ -92,7 +92,7 @@ namespace clrs_impl_jn {
         if (size_ == 0)
             root_ = nullptr;
         else {
-            root_ = new Tree_Node<T>(old_bst.root_->key);
+            root_ = new Tree_Node<T>(old_bst.root_->key_);
             root_->parent_ = nullptr;
             fill_tree(root_->left_, old_bst.root_->left_);
             fill_tree(root_->right_, old_bst.root_->right_);
@@ -109,7 +109,7 @@ namespace clrs_impl_jn {
         if (size_ == 0)
             root_ = nullptr;
         else {
-            root_ = new Tree_Node<T>(old_bst.root_->key);
+        root_ = new Tree_Node<T>(old_bst.root_->key_);
             fill_tree(root_->left_, old_bst.root_->left_);
             fill_tree(root_->right_, old_bst.root_->right_);
         }
@@ -122,7 +122,7 @@ namespace clrs_impl_jn {
         if (tocopy_node == nullptr)
             member_node = nullptr;
         else {
-            member_node = new Tree_Node<T>(tocopy_node->key);
+            member_node = new Tree_Node<T>(tocopy_node->key_);
             if (tocopy_node->left_ == nullptr)
                 member_node->left_ = nullptr;
             else
