@@ -5,6 +5,8 @@
 //  Created by Joshua Navon on 7/14/20.
 //  Copyright © 2020 Joshua Navon. All rights reserved.
 //
+#include "gtest/gtest.h"
+#include "BST.hpp"
 #include "sort_jn.hpp"
 #include "binary_heap.hpp"
 #include <vector>
@@ -141,7 +143,15 @@ int main(int argc, const char * argv[]) {
     cout << "Sorted:" << endl;
     for (auto p : v5)
         cout << p << " ";
-    cout << endl;
+    cout << endl << endl;
     
+    clrs_impl_jn::BST<int> bst = clrs_impl_jn::BST<int>();
+    for (int ii = 0; ii < 10; ii++) {
+        int num = dist(engine);
+        cout << num << " ";
+        bst.insert(num);
+    }
+    cout << endl;
+    bst.inorder_walk();
     return 0;
 }
